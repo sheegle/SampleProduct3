@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var taskData = [(title: "", completed: false)]
-    @State var isShowAddView = false
+    @State private var isShowAddView = false
     
     var body: some View {
         NavigationStack {
@@ -26,12 +26,14 @@ struct ContentView: View {
                 
                 .navigationTitle("ToDoリスト")
                 .toolbar {
-                    Text("+")
-                    isShowAddView = true
+                    Button("+") {
+                        isShowAddView = true
+                    }
                 }
                 .sheet(isPresented: $isShowAddView){
-                    AddView()
+                    AddView(taskData: $taskData)
                 }
+                
             }
             
         }
