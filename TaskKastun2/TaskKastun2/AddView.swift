@@ -13,7 +13,7 @@ struct AddView: View {
     
     @State private var inputText:String = ""
     @Environment(\.dismiss) private var dismiss
-    @Binding var taskData: [(title: String, completed: Bool)]
+    @Binding var taskData: [TodoItem]
 
     
     var body: some View {
@@ -32,9 +32,10 @@ struct AddView: View {
                         }
                     }
                     ToolbarItem(placement: .confirmationAction) {
-                    Button("save") {
-                        taskData.append((title: inputText, completed: false))
-                        dismiss()
+                        Button("save") {
+                            let newItem = TodoItem(title: inputText, completed: false)
+                            taskData.append(newItem)
+                            dismiss()
                         }
                     }
                 }
